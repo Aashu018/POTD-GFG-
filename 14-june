@@ -1,0 +1,23 @@
+
+
+//User function Template for Java
+
+class Solution {
+    static long maxDiamonds(int[] A, int N, int K) {
+        // code here
+        PriorityQueue<Integer> hm = new PriorityQueue<>(Comparator.reverseOrder());
+        for(int i=0;i<N;i++){
+            hm.add(A[i]);
+            //System.out.print(hm.peek() + " ");
+        }
+        long ans = 0;
+        for(int i=0;i<K;i++){
+            int lar = hm.remove();
+            ans += lar;
+            // System.out.print(ans + " ");
+            lar /= 2;
+            hm.add(lar);
+        }
+        return ans;
+    }
+};
