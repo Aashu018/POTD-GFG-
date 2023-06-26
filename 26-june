@@ -1,0 +1,43 @@
+
+
+// User function Template for Java
+
+class Solution {
+    public int nCr(int n, int r) {
+        if(n<r){
+            return 0;
+        }
+        int MOD = 1000000007;
+
+        if (r > n - r) {
+            r = n - r;
+        }
+
+        long numerator = 1;
+        long denominator = 1;
+
+        for (int i = 0; i < r; i++) {
+            numerator = (numerator * (n - i)) % MOD;
+            denominator = (denominator * (i + 1)) % MOD;
+        }
+
+        long result = (numerator * power(denominator, MOD - 2, MOD)) % MOD;
+
+        return (int) result;
+    }
+
+    private long power(long base, long exponent, int MOD) {
+        long result = 1;
+
+        while (exponent > 0) {
+            if (exponent % 2 == 1) {
+                result = (result * base) % MOD;
+            }
+
+            base = (base * base) % MOD;
+            exponent /= 2;
+        }
+
+        return result;
+    }
+}
