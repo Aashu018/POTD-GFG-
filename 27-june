@@ -1,0 +1,81 @@
+
+
+/*
+    class Node
+    {
+        int data;
+        Node next;
+        Node(int d) {data = d; next = null; }
+    }
+*/
+
+class Sol
+{
+	public static Node findUnion(Node head1,Node head2)
+	{
+	    //Add your code here.
+	    Node sort1 = sortList(head1);
+	    Node sort2 = sortList(head2);
+	    Node sorted  = merge(sort1,sort2);
+	    Node temp = sorted;
+	    while(temp != null){
+	        while(temp.next != null && temp.data == temp.next.data){
+	            temp.next = temp.next.next;
+	        }
+	        if(temp != null)
+	        temp = temp.next;
+	    }
+	    return sorted;
+	}
+	public static Node sortList(Node head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        Node mid = findMiddle(head);
+        Node midNext = mid.next;
+        mid.next = null;
+
+        Node left = sortList(head);
+        Node right = sortList(midNext);
+
+        return merge(left, right);
+    }
+
+    private static Node findMiddle(Node head) {
+        Node slow = head;
+        Node fast = head.next;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        return slow;
+    }
+
+    private static Node merge(Node left, Node right) {
+        Node dummy = new Node(0);
+        Node current = dummy;
+
+        while (left != null && right != null) {
+            if (left.data <= right.data) {
+                current.next = left;
+                left = left.next;
+            } else {
+                current.next = right;
+                right = right.next;
+            }
+            current = current.next;
+        }
+
+        if (left != null) {
+            current.next = left;
+        }
+        if (right != null) {
+            current.next = right;
+        }
+
+        return dummy.next;
+    }
+}
