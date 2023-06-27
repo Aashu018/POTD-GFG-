@@ -1,0 +1,22 @@
+/* The Node structure is
+struct Node
+{
+    int data;
+    Node* left;
+    Node* right;
+}; */
+
+class Solution{
+  public:
+    /*You are required to complete this method*/
+   int maxDepth(Node* node) {
+    if (node == nullptr) {
+        return 0;
+    }
+
+    int leftDepth = maxDepth(node->left);
+    int rightDepth = maxDepth(node->right);
+
+    return std::max(leftDepth, rightDepth) + 1;
+}
+};
