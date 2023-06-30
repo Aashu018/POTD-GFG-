@@ -1,0 +1,23 @@
+
+
+//User function Template for Java
+
+class Solution {
+    int isDivisible(String s) {
+        // code here
+        int len = s.length();
+        int sum = 0;
+       for (int i = 0; i < len; i++) {
+        char ch = s.charAt(i);
+        int bit = ch - '0';
+        sum = (sum * 2 + bit) % 3; // Update the sum modulo 3 at each step
+    }
+    
+        if(sum==0){
+            return 1;
+        }
+        return 0;
+    }
+    
+    
+}
